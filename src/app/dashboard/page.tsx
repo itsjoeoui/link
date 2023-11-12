@@ -2,6 +2,7 @@ import { CreateLink } from "@/components/dashboard/create-link";
 import { Button } from "@/components/ui/button";
 import { db } from "@/lib/kysely";
 import { initPostgres, nukePostgres } from "@/utils/postgres/migration";
+import { currentUser } from "@clerk/nextjs";
 
 export default async function Dashboard() {
   let links;
@@ -17,6 +18,8 @@ export default async function Dashboard() {
     }
   }
 
+  const user = await currentUser();
+
   return (
     <div className="container">
       <div className="py-6"></div>
@@ -25,9 +28,11 @@ export default async function Dashboard() {
       <CreateLink />
       <div className="py-2"></div>
 
-      <form action={nukePostgres}>
-        <Button type="submit">Nuke</Button>
-      </form>
+      {user?.emailAddresses[0].emailAddress === "joey@jyu.dev" && (
+        <form action={nukePostgres}>
+          <Button type="submit">Nuke</Button>
+        </form>
+      )}
 
       {links.map((link) => (
         <div key={link.alias} className="flex gap-2">
