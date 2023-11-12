@@ -1,5 +1,4 @@
 import { authMiddleware } from "@clerk/nextjs";
-import { redirect } from "next/navigation";
 import { getLink } from "./utils/postgres/actions";
 import { NextResponse } from "next/server";
 
@@ -14,7 +13,7 @@ export default authMiddleware({
       console.log(alias);
 
       const destination = await getLink(alias);
-      return NextResponse.rewrite(destination);
+      return NextResponse.redirect(destination);
     }
   },
   publicRoutes: ["/", "/l"],
