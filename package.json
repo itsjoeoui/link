@@ -12,6 +12,7 @@
   "dependencies": {
     "@clerk/nextjs": "^4.27.1",
     "@radix-ui/react-slot": "^1.0.2",
+    "@vercel/kv": "^1.0.0",
     "@vercel/postgres": "^0.5.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
