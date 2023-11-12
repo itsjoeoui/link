@@ -8,15 +8,21 @@ import { NextResponse } from "next/server";
 export default authMiddleware({
   async beforeAuth(req) {
     const parsedUrl = new URL(req.url);
-    if (parsedUrl.pathname.includes("/l/")) {
-      const alias = parsedUrl.pathname.split("/l/")[1];
-      console.log(alias);
 
-      const destination = await getLink(alias);
-      return NextResponse.redirect(destination);
+    if (parsedUrl.pathname.includes("/l/")) {
+      // pathname is like "/l/alias"
+      // split gives ['', 'l', 'alias']
+      const alias = parsedUrl.pathname.split("/")[2];
+
+      const result = await getLink(alias);
+      if (result.ok) {
+        return NextResponse.redirect(result.value);
+      } else {
+        return NextResponse.redirect(parsedUrl.origin + "/404");
+      }
     }
   },
-  publicRoutes: ["/", "/l"],
+  publicRoutes: ["/", "/404"],
 });
 
 export const config = {
