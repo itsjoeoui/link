@@ -9,10 +9,14 @@ import { revalidatePath } from "next/cache";
 export async function createLink(formData: z.infer<typeof createLinkSchema>) {
   console.log(formData);
 
-  const { userId } = auth();
+  const { user } = auth();
 
-  if (!userId) {
+  if (!user) {
     return { ok: false, message: "Unauthorized" };
+  }
+
+  if (user.emailAddresses[0].emailAddress !== "joey@jyu.dev") {
+    return { ok: false, message: "Only Joey is allowed for now xD" };
   }
 
   try {
@@ -22,7 +26,7 @@ export async function createLink(formData: z.infer<typeof createLinkSchema>) {
         name: formData.name || "",
         destination: formData.destination,
         alias: formData.alias || "",
-        ownerId: userId,
+        ownerId: user.id,
       })
       .executeTakeFirst();
 
