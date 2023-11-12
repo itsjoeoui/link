@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/utils/style";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { ClerkProvider } from "@clerk/nextjs";
+import { SiteHeader } from "@/components/header";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -32,6 +33,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <SiteHeader />
             {children}
           </ThemeProvider>
         </body>

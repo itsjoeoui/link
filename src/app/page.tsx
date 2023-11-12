@@ -1,3 +1,8 @@
 export default function Home() {
-  return <div>Hello World</div>;
+  return (
+    <div className="container">
+      <div className="py-6"></div>
+      <div>Home</div>
+    </div>
+  );
 }
