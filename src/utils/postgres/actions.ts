@@ -3,13 +3,11 @@
 import z from "zod";
 import { createLinkSchema } from "@/types/link";
 import { db } from "@/lib/kysely";
-import { auth } from "@clerk/nextjs/server";
+import { currentUser } from "@clerk/nextjs";
 import { revalidatePath } from "next/cache";
 
 export async function createLink(formData: z.infer<typeof createLinkSchema>) {
-  console.log(formData);
-
-  const { user } = auth();
+  const user = await currentUser();
 
   if (!user) {
     return { ok: false, message: "Unauthorized" };
