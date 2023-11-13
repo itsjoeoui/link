@@ -86,7 +86,7 @@ export function CreateLink() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit">Create</Button>
         <div>{msg}</div>
       </form>
     </Form>
