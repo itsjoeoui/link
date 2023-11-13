@@ -14,10 +14,6 @@ export async function createLink(formData: z.infer<typeof createLinkSchema>) {
     return { ok: false, message: "Unauthorized" };
   }
 
-  if (user.emailAddresses[0].emailAddress !== "joey@jyu.dev") {
-    return { ok: false, message: "Only Joey is allowed for now xD" };
-  }
-
   try {
     await db
       .insertInto("link")
