@@ -32,7 +32,7 @@ export default async function Home() {
         <PageHeaderHeading>
           Link{" "}
           <span className="font-normal text-xl tracking-normal leading-normal">
-            from jyu.dev
+            from <Link href="https://jyu.dev">jyu.dev</Link>
           </span>
         </PageHeaderHeading>
         <PageHeaderDescription>
