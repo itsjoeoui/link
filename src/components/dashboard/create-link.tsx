@@ -39,6 +39,22 @@ export function CreateLink() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
         <FormField
           control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Name</FormLabel>
+              <FormControl>
+                <Input placeholder="Google" {...field} />
+              </FormControl>
+              <FormDescription>
+                Give it a name so you can remember what it is.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
           name="destination"
           render={({ field }) => (
             <FormItem>
@@ -48,22 +64,6 @@ export function CreateLink() {
               </FormControl>
               <FormDescription>
                 This is the link that will be shortened.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Name (optional)</FormLabel>
-              <FormControl>
-                <Input placeholder="Google" {...field} />
-              </FormControl>
-              <FormDescription>
-                Give it a name so you can remember what it is.
               </FormDescription>
               <FormMessage />
             </FormItem>
