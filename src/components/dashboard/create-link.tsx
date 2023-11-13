@@ -16,18 +16,24 @@ import {
 import { Input } from "@/components/ui/input";
 import { createLink } from "@/utils/postgres/actions";
 import { createLinkSchema } from "@/types/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { generateRandomAlias } from "@/utils/generate";
 
 export function CreateLink() {
+  const [msg, setMsg] = useState("");
+
+  useEffect(() => {
+    form.setValue("alias", generateRandomAlias());
+  }, []);
+
   const form = useForm<z.infer<typeof createLinkSchema>>({
     resolver: zodResolver(createLinkSchema),
     defaultValues: {
       name: "",
-      alias: "",
       destination: "",
+      alias: "",
     },
   });
-  const [msg, setMsg] = useState("");
 
   async function onSubmit(values: z.infer<typeof createLinkSchema>) {
     const result = await createLink(values);
@@ -74,7 +80,7 @@ export function CreateLink() {
           name="alias"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Alias (optional)</FormLabel>
+              <FormLabel>Alias</FormLabel>
               <FormControl>
                 <Input placeholder="google" {...field} />
               </FormControl>
