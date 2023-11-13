@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title: "Link from jyu.dev",
   description: "An open source link shortener (may be longer) service.",
   icons: {
-    icon: "/favicon.svg",
+    icon: "/favicon.png",
   },
 };
 
