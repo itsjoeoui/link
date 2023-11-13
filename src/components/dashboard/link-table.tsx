@@ -21,6 +21,8 @@ export async function LinkTable() {
   }
 
   let links;
+  let startTime = Date.now();
+
   try {
     links = await db
       .selectFrom("link")
@@ -40,9 +42,13 @@ export async function LinkTable() {
     }
   }
 
+  const duration = Date.now() - startTime;
+
   return (
     <Table>
-      <TableCaption>A list of your links.</TableCaption>
+      <TableCaption>
+        Loaded {links.length} link(s) in {duration}ms
+      </TableCaption>
       <TableHeader>
         <TableRow>
           <TableHead className="w-[100px]">Name</TableHead>
