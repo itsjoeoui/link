@@ -1,6 +1,5 @@
 import { CreateLink } from "@/components/dashboard/create-link";
 import LinkTable from "@/components/dashboard/link-table";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -9,7 +8,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { db } from "@/lib/kysely";
-import { nukePostgres } from "@/utils/postgres/migration";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
@@ -60,12 +58,6 @@ export default async function Dashboard() {
           </Card>
         </div>
       </div>
-
-      {user?.emailAddresses[0].emailAddress === "joey@jyu.dev" && (
-        <form action={nukePostgres}>
-          <Button type="submit">Nuke</Button>
-        </form>
-      )}
     </div>
   );
 }
