@@ -36,7 +36,7 @@ export default async function Home() {
           </span>
         </PageHeaderHeading>
         <PageHeaderDescription>
-          An open source link shortener service.
+          An open source link shortener (may be longer) service.
         </PageHeaderDescription>
         <div className="flex w-full items-center space-x-4 pb-8 pt-4 md:pb-10">
           <Link href="/dashboard" className={cn(buttonVariants())}>
