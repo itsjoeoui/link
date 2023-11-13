@@ -15,7 +15,6 @@ export async function LinkTable() {
   let links;
   try {
     links = await db.selectFrom("link").selectAll().execute();
-    console.log(links);
   } catch (e: any) {
     if (e.message === 'relation "link" does not exist') {
       await initPostgres();
