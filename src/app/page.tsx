@@ -11,6 +11,8 @@ import { cn } from "@/utils/style";
 import { ArrowRightIcon } from "lucide-react";
 import Link from "next/link";
 import packageJson from "../../package.json";
+import Image from "next/image";
+import dashboardPic from "../../assets/home.png";
 
 export default async function Home() {
   return (
@@ -53,6 +55,9 @@ export default async function Home() {
           </Link>
         </div>
       </PageHeader>
+      <div>
+        <Image src={dashboardPic} alt="Dashboard" width={960} />
+      </div>
     </div>
   );
 }
