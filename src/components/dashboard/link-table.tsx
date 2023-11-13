@@ -10,15 +10,31 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
+import { currentUser } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 
 export async function LinkTable() {
+  const user = await currentUser();
+
+  if (!user) {
+    redirect("/");
+  }
+
   let links;
   try {
-    links = await db.selectFrom("link").selectAll().execute();
+    links = await db
+      .selectFrom("link")
+      .selectAll()
+      .where("ownerId", "=", user.id)
+      .execute();
   } catch (e: any) {
     if (e.message === 'relation "link" does not exist') {
       await initPostgres();
-      links = await db.selectFrom("link").selectAll().execute();
+      links = await db
+        .selectFrom("link")
+        .selectAll()
+        .where("ownerId", "=", user.id)
+        .execute();
     } else {
       throw e;
     }
