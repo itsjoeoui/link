@@ -51,7 +51,7 @@ export async function LinkTable() {
       </TableCaption>
       <TableHeader>
         <TableRow>
-          <TableHead className="w-[100px]">Name</TableHead>
+          <TableHead className="">Name</TableHead>
           <TableHead>Destination</TableHead>
           <TableHead className="text-right">Actions</TableHead>
         </TableRow>

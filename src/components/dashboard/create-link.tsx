@@ -24,6 +24,7 @@ export function CreateLink() {
 
   useEffect(() => {
     form.setValue("alias", generateRandomAlias());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const form = useForm<z.infer<typeof createLinkSchema>>({

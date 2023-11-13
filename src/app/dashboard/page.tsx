@@ -34,8 +34,8 @@ export default async function Dashboard() {
       </div>
       <div className="py-3"></div>
 
-      <div className="grid grid-cols-3 gap-6">
-        <div className="col-span-1">
+      <div className="grid lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-1 relative w-full overflow-auto">
           <Card>
             <CardHeader>
               <CardTitle>Create Link</CardTitle>
@@ -46,7 +46,7 @@ export default async function Dashboard() {
             </CardContent>
           </Card>
         </div>
-        <div className="col-span-2">
+        <div className="lg:col-span-2 relative w-full overflow-auto">
           <Card>
             <CardHeader>
               <CardTitle>Your Links</CardTitle>
