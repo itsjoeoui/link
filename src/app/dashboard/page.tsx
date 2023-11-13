@@ -8,15 +8,32 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { db } from "@/lib/kysely";
 import { nukePostgres } from "@/utils/postgres/migration";
 import { currentUser } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 
 export default async function Dashboard() {
   const user = await currentUser();
+  if (!user) {
+    redirect("/");
+  }
+
+  const count = await db
+    .selectFrom("link")
+    .where("ownerId", "=", user.id)
+    .select((eb) => eb.fn.count("ownerId").as("total"))
+    .execute();
 
   return (
     <div className="container">
-      <div className="py-6"></div>
+      <div className="py-3"></div>
+      <div className="text-3xl font-bold">Welcome! {user?.firstName}</div>
+      <div className="">
+        You currently have {count[0].total.toString()} active link(s).
+      </div>
+      <div className="py-3"></div>
+
       <div className="grid grid-cols-3 gap-6">
         <div className="col-span-1">
           <Card>
