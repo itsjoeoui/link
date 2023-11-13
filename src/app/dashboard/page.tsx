@@ -25,7 +25,7 @@ export default async function Dashboard() {
 
   return (
     <div className="container">
-      <div className="py-3"></div>
+      <div className="py-6"></div>
       <div className="text-3xl font-bold">Welcome! {user?.firstName}</div>
       <div className="">
         You currently have {count[0].total.toString()} active link(s).
