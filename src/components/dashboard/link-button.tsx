@@ -1,5 +1,6 @@
 "use client";
 
+import { toast } from "sonner";
 import { Button } from "../ui/button";
 
 type Props = {
@@ -13,6 +14,7 @@ const LinkButton = ({ link }: Props) => {
         window.navigator.clipboard.writeText(
           window.location.origin + "/l/" + link,
         );
+        toast("Link copied to clipboard!");
       }}
     >
       Copy

@@ -5,6 +5,7 @@ import { cn } from "@/utils/style";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { ClerkProvider } from "@clerk/nextjs";
 import { SiteHeader } from "@/components/header";
+import { Toaster } from "@/components/toaster";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -36,6 +37,7 @@ export default function RootLayout({
           >
             <SiteHeader />
             {children}
+            <Toaster />
           </ThemeProvider>
         </body>
       </html>
