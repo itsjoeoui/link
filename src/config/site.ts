@@ -17,3 +17,20 @@ export const siteConfig = {
     github: "https://github.com/itsjoeoui/link",
   },
 };
+
+export const changelog = [
+  {
+    version: "0.1.1",
+    items: [
+      "Added the ability to remove a link.",
+      "Fixed a bug where duplicated aliases can be created.",
+      "Added visit count.",
+      "Added this changelog page.",
+      "Switched the create feedback message display to toast.",
+    ],
+  },
+  {
+    version: "0.1.0",
+    items: ["Introduce Link!"],
+  },
+];

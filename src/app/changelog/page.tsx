@@ -3,6 +3,9 @@ import {
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { changelog } from "@/config/site";
+import { Dot } from "lucide-react";
 
 export default async function Changelog() {
   return (
@@ -10,23 +13,29 @@ export default async function Changelog() {
       <PageHeader>
         <PageHeaderHeading>Changelog</PageHeaderHeading>
         <PageHeaderDescription>
-          Here are all the changes we have made to Link.
+          Here are all the changes I have made to Link.
         </PageHeaderDescription>
       </PageHeader>
 
       <div className="py-2" />
 
-      <div className="font-bold text-2xl">V0.1.1</div>
-      <div>- Added the ability to remove a link.</div>
-      <div>- Fixed a bug where duplicated aliases can be created.</div>
-      <div>- Added visit count.</div>
-      <div>- Added this changelog page.</div>
-      <div>- Switched the create feedback message display to toast.</div>
+      {changelog.map((release) => (
+        <Card key={release.version} className="my-4">
+          <CardHeader>
+            <CardTitle className="font-bold text-2xl">
+              V{release.version}
+            </CardTitle>
+          </CardHeader>
 
-      <div className="py-2" />
-
-      <div className="font-bold text-2xl">V0.1.0</div>
-      <div>- Introducing Link.</div>
+          <CardContent>
+            {release.items.map((log, idx) => (
+              <div className="flex" key={idx}>
+                <Dot className="flex-shrink-0" /> <div>{log}</div>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+      ))}
     </div>
   );
 }
