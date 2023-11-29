@@ -21,6 +21,7 @@ export const siteConfig = {
 export const changelog = [
   {
     version: "0.1.1",
+    date: "2023-11-29",
     items: [
       "Added the ability to remove a link.",
       "Fixed a bug where duplicated aliases can be created.",
@@ -31,6 +32,7 @@ export const changelog = [
   },
   {
     version: "0.1.0",
+    date: "2023-11-12",
     items: ["Introduce Link!"],
   },
 ];

@@ -3,7 +3,13 @@ import {
   PageHeaderDescription,
   PageHeaderHeading,
 } from "@/components/page-header";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { changelog } from "@/config/site";
 import { Dot } from "lucide-react";
 
@@ -25,6 +31,7 @@ export default async function Changelog() {
             <CardTitle className="font-bold text-2xl">
               V{release.version}
             </CardTitle>
+            <CardDescription>{release.date}</CardDescription>
           </CardHeader>
 
           <CardContent>
