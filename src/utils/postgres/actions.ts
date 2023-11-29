@@ -7,14 +7,18 @@ import { currentUser } from "@clerk/nextjs";
 import { revalidatePath } from "next/cache";
 import { Result } from "@/types/result";
 
-export async function createLink(formData: z.infer<typeof createLinkSchema>) {
+export async function createLink(
+  formData: z.infer<typeof createLinkSchema>,
+): Promise<Result<string, string>> {
   const user = await currentUser();
 
   if (!user) {
-    return { ok: false, message: "Unauthorized" };
+    return { ok: false, error: "Unauthorized" };
   }
 
   try {
+    let startTime = Date.now();
+
     await db
       .insertInto("link")
       .values({
@@ -25,12 +29,33 @@ export async function createLink(formData: z.infer<typeof createLinkSchema>) {
         visitCount: 0,
       })
       .executeTakeFirst();
+    const duration = Date.now() - startTime;
 
     revalidatePath("/dashboard");
 
-    return { ok: true, message: "Success!" };
+    return { ok: true, value: `Success! (${duration}ms)` };
   } catch (e: any) {
-    return { ok: false, message: e.message };
+    return { ok: false, error: "This alias has already been taken :(" };
+  }
+}
+
+export async function removeLink(
+  alias: string,
+): Promise<Result<string, string>> {
+  const user = await currentUser();
+
+  if (!user) {
+    return { ok: false, error: "Unauthorized" };
+  }
+
+  try {
+    await db.deleteFrom("link").where("alias", "=", alias).execute();
+
+    revalidatePath("/dashboard");
+
+    return { ok: true, value: "Success!" };
+  } catch (e: any) {
+    return { ok: false, error: e.message };
   }
 }
 
@@ -43,6 +68,7 @@ export async function getLink(alias: string): Promise<Result<string>> {
       .where("alias", "=", alias)
       .execute();
 
+    // no need to await this because we don't care about the result
     db.updateTable("link")
       .set((db) => ({
         visitCount: db("visitCount", "+", 1),

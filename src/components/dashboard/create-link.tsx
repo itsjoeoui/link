@@ -16,12 +16,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { createLink } from "@/utils/postgres/actions";
 import { createLinkSchema } from "@/types/link";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { generateRandomAlias } from "@/utils/generate";
+import { toast } from "sonner";
 
 export function CreateLink() {
-  const [msg, setMsg] = useState("");
-
   useEffect(() => {
     form.setValue("alias", generateRandomAlias());
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -38,7 +37,12 @@ export function CreateLink() {
 
   async function onSubmit(values: z.infer<typeof createLinkSchema>) {
     const result = await createLink(values);
-    setMsg(result.message);
+    if (!result.ok) {
+      toast.error(result.error);
+      return;
+    }
+    toast.success(result.value);
+    form.reset();
   }
 
   return (
@@ -94,7 +98,6 @@ export function CreateLink() {
           )}
         />
         <Button type="submit">Create</Button>
-        <div>{msg}</div>
       </form>
     </Form>
   );

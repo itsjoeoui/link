@@ -1,5 +1,5 @@
 import { db } from "@/lib/kysely";
-import LinkButton from "./link-button";
+import LinkActions from "./link-actions";
 import {
   Table,
   TableBody,
@@ -62,7 +62,7 @@ export async function LinkTable() {
             <TableCell>{link.destination}</TableCell>
             <TableCell>{link.visitCount}</TableCell>
             <TableCell className="text-right">
-              <LinkButton link={link.alias} />
+              <LinkActions link={link.alias} />
             </TableCell>
           </TableRow>
         ))}
