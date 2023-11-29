@@ -22,6 +22,7 @@ export async function createLink(formData: z.infer<typeof createLinkSchema>) {
         destination: formData.destination,
         alias: formData.alias || "",
         ownerId: user.id,
+        visitCount: 0,
       })
       .executeTakeFirst();
 
@@ -41,6 +42,13 @@ export async function getLink(alias: string): Promise<Result<string>> {
       .distinct()
       .where("alias", "=", alias)
       .execute();
+
+    db.updateTable("link")
+      .set((db) => ({
+        visitCount: db("visitCount", "+", 1),
+      }))
+      .where("alias", "=", alias)
+      .executeTakeFirst();
 
     return {
       ok: true,

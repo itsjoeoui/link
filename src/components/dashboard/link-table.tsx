@@ -1,5 +1,4 @@
 import { db } from "@/lib/kysely";
-import { initPostgres } from "@/utils/postgres/migration";
 import LinkButton from "./link-button";
 import {
   Table,
@@ -31,7 +30,6 @@ export async function LinkTable() {
       .execute();
   } catch (e: any) {
     if (e.message === 'relation "link" does not exist') {
-      await initPostgres();
       links = await db
         .selectFrom("link")
         .selectAll()
@@ -53,6 +51,7 @@ export async function LinkTable() {
         <TableRow>
           <TableHead className="">Name</TableHead>
           <TableHead>Destination</TableHead>
+          <TableHead className="whitespace-nowrap">Visit Count</TableHead>
           <TableHead className="text-right">Actions</TableHead>
         </TableRow>
       </TableHeader>
@@ -61,6 +60,7 @@ export async function LinkTable() {
           <TableRow key={link.alias}>
             <TableCell className="font-medium">{link.name}</TableCell>
             <TableCell>{link.destination}</TableCell>
+            <TableCell>{link.visitCount}</TableCell>
             <TableCell className="text-right">
               <LinkButton link={link.alias} />
             </TableCell>

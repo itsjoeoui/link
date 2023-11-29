@@ -10,4 +10,5 @@ export interface LinkTable {
   alias: string;
   ownerId: string;
   name: string;
+  visitCount: number;
 }
