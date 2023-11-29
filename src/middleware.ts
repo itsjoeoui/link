@@ -22,7 +22,7 @@ export default authMiddleware({
       }
     }
   },
-  publicRoutes: ["/", "/404"],
+  publicRoutes: ["/", "/404", "/changelog"],
 });
 
 export const config = {
