@@ -8,6 +8,10 @@ export const siteConfig = {
       title: "Dashboard",
       href: "/dashboard",
     },
+    {
+      title: "Changelog",
+      href: "/changelog",
+    },
   ],
   links: {
     github: "https://github.com/itsjoeoui/link",
